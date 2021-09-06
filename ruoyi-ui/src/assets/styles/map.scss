@@ -1,0 +1,370 @@
+// 地图样式
+.info-wrap {
+  .info-item {
+    padding: 3px 0;
+    font-size: 12px;
+    color: #999;
+    span {
+      color: #333;
+    }
+  }
+}
+// 谷歌
+.gm-style {
+  .cluster {
+    span {
+      color: #fff;
+    }
+  }
+  /*谷歌marker-label样式*/
+  .google-marker-label {
+    position: relative;
+    top: -35px;
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #666 !important;
+    border-radius: 5px;
+  }
+  .gm-style-iw-c {
+    // min-height: 50px;
+    font-weight: normal;
+    outline: none;
+    transition: all 0.2s;
+  }
+  .info-wrap {
+    .info-item {
+      padding: 5px 0;
+    }
+  }
+}
+.map-track {
+  height: 100%;
+  min-height: 500px;
+  .gm-ui-hover-effect {
+    display: none !important;
+  }
+}
+// 地图搜索
+.searchResultPanel {
+  display: none;
+}
+.pac-target-input {
+  position: absolute;
+  top: 10px !important;
+  left: auto !important;
+  right: 90px;
+  width: 300px !important;
+  z-index: 2;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+}
+.bd-wrap {
+  position: relative;
+}
+
+// 百度
+.map-box {
+  position: relative;
+  .map-btn {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    z-index: 2;
+    .el-button {
+      height: 40px;
+      background-color: #fff;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+      border: none;
+      color: #333;
+      font-size: 16px;
+      &:hover {
+        background-color: #eee;
+      }
+    }
+    .iconfont {
+      margin-right: 5px;
+    }
+  }
+  &.gmap {
+    .map-btn {
+      left: 210px;
+    }
+    .g-input {
+      display: none;
+    }
+  }
+}
+.BMap_cpyCtrl.BMap_noprint.anchorBL {
+  // left: auto !important;
+  // right: 2px !important;
+}
+.BMap_Marker .BMapLabel {
+  position: relative;
+  width: 190px;
+  left: 50% !important;
+  margin-left: -77px;
+  height: 30px;
+  line-height: 30px !important;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  border: none !important;
+  font-size: 14px !important;
+  padding: 0 5px !important;
+  // &::before {
+  //   position: absolute;
+  //   left: 50%;
+  //   margin-left: -10px;
+  //   bottom: -8px;
+  //   width: 0;
+  //   height: 0;
+  //   content: '';
+  //   border-color: transparent;
+  //   border-style: solid;
+  //   border-width: 10px;
+  //   border-bottom-width: 0;
+  //   border-top-color: #fff;
+  // }
+  .online-status {
+    margin-left: 5px;
+  }
+}
+// 百度地图信息窗口样式修改
+.mapContainer-Clusterer {
+  height: 100%;
+  > .map-el {
+    height: 100% !important;
+  }
+}
+.mapContainer {
+  .BMap_pop {
+    > div {
+      display: none;
+    }
+    > img {
+      top: 22px !important;
+    }
+    > div:nth-child(9) {
+      display: block;
+      overflow: visible !important;
+      background: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 7px 1px rgba(0, 0, 0, 0.3);
+      &:after {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        bottom: -26px;
+        left: 50%;
+        z-index: 99;
+        margin-left: -13px;
+        border-top-color: #ffffff;
+        border-bottom-width: 0;
+        content: " ";
+        border-width: 16px;
+      }
+      .BMap_bubble_content {
+      }
+    }
+  }
+  .BMap_bubble_content {
+    // 解决溢出隐藏问题
+    max-height: 100% !important;
+    overflow: auto;
+    div input {
+      background: none !important;
+      margin-left: 2px !important;
+    }
+  }
+  .BMap_shadow {
+    display: none;
+  }
+  .BMap_Marker {
+    > div {
+      text-align: center;
+      line-height: 38px;
+      img {
+        display: inline-block !important;
+        max-width: 100% !important;
+        // height: auto !important;
+      }
+    }
+  }
+}
+.map-msg {
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: left;
+  ul {
+    padding: 0;
+  }
+  li {
+    list-style: none;
+    display: flex;
+  }
+  .title {
+    margin: -10px 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    line-height: 48px;
+    border-bottom: 1px solid #e6e6e6;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .el-btn {
+    padding-top: 8px;
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    .el-button--text {
+      position: relative;
+      padding: 8px 5px;
+      margin-left: 0;
+      width: 50%;
+      float: left;
+      text-align: center;
+      font-size: inherit;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      // white-space: nowrap;
+      &:nth-of-type(2n)::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        content: "";
+        margin-top: -13px;
+        width: 1px;
+        height: 26px;
+        background: #ccc;
+      }
+    }
+    padding-top: 8px;
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    .el-button--text {
+      position: relative;
+      padding: 8px 5px;
+      margin-left: 0;
+      width: 50%;
+      float: left;
+      text-align: center;
+      font-size: inherit;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      &:nth-of-type(2n)::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        content: "";
+        margin-top: -13px;
+        width: 1px;
+        height: 26px;
+        background: #ccc;
+      }
+    }
+  }
+
+  .el-button--text.hand {
+    border-bottom: 1px solid #409eff;
+    font-style: normal;
+  }
+  label {
+    font-weight: normal;
+    display: inline-block;
+    max-width: 250px;
+    height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+    color: #333333;
+    &.location {
+      // font-size: 12px;
+    }
+    display: inline-block;
+    max-width: 200px;
+    height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+    color: #333333;
+    &.location {
+      // font-size: 12px;
+    }
+  }
+  div > span {
+    display: inline-block;
+    height: 22px;
+    color: #666;
+    vertical-align: middle;
+    // font-weight: bold;
+  }
+  a,
+  a:hover {
+    color: #409eff;
+  }
+  .battery-snNo {
+    margin-right: 15px;
+  }
+  .battery-eng {
+    padding: 2px 5px;
+    // background-color: #98FB98;
+    border: 1px solid #000;
+    color: #ffffff;
+  }
+  .map-btn {
+    a {
+      display: inline-block;
+      width: 25%;
+      float: left;
+      margin: 4px 0;
+    }
+  }
+}
+.map-box-en {
+  .el-btn {
+    .el-button--text {
+      font-size: 12px;
+      width: 45%;
+      &:nth-of-type(2n) {
+        width: 55%;
+      }
+    }
+  }
+}
+.map-info-block {
+  .map-info {
+    li {
+      padding: 0 0 5px;
+      label,
+      .txt {
+        display: block;
+        height: 22px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+.map-box-en {
+  .el-btn {
+    .el-button--text {
+      font-size: 12px;
+      width: 45%;
+      &:nth-of-type(2n) {
+        width: 55%;
+      }
+    }
+  }
+}
