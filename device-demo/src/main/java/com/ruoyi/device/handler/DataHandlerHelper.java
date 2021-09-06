@@ -2,6 +2,7 @@ package com.ruoyi.device.handler;
 
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.core.redis.RedisCache;
@@ -19,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,12 +43,27 @@ public class DataHandlerHelper implements DataHandler {
 		Device device = redisCache.getCacheObject(key);
 		if (null == device) {
 			device = new Device();
-			device.setProductKey(productKey);
-			device.setImei(deviceKey);
+			device.setImei("202109052000123");
+			device.setProductKey("p111r2");
+			device.setDeviceName("智能饲喂机");
+			device.setOnlineStatus(0);
+			device.setTsCreateTime(System.currentTimeMillis());
+			device.setRunningStatus(0);
+			device.setDeviceSn("QWERTYUIOP20210906");
+			device.setModelSpec("EC-200");
+			device.setIccid("123321123512521");
+			device.setLocateType(0);
+			device.setLocateTime(DateUtil.formatDateTime(new Date()));
+			device.setSoc(100);
+			device.setHdop(1.93f);
+			device.setSatellites(6);
+			device.setWgsLng(new BigDecimal("117.127414"));
+			device.setWgsLat(new BigDecimal("31.82613"));
 			device.setOnlineStatus(status);
 			device.setTsOnlineTime(System.currentTimeMillis());
 			redisCache.setCacheObject(key, device);
 		} else {
+			device.setTsOnlineTime(System.currentTimeMillis());
 			device.setOnlineStatus(status);
 			redisCache.setCacheObject(key, device);
 		}
@@ -130,6 +148,7 @@ public class DataHandlerHelper implements DataHandler {
 			log.error("不存在此设备【{}】", deviceLocationBO.getDeviceKey());
 			return;
 		}
+		device.setLocateTime(DateUtil.formatDateTime(new Date(deviceLocationBO.getCreatedAt())));
 		device.setWgsLng(locationData.getLng());
 		device.setHdop(locationData.getHdop());
 		device.setWgsLat(locationData.getLat());

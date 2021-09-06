@@ -1,5 +1,6 @@
 package com.ruoyi.device;
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -20,6 +21,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 
 import static com.ruoyi.device.constant.RedisKeyConstants.DEVICE;
@@ -52,6 +54,7 @@ public class AmqpClientRunner implements ApplicationRunner {
 		device.setDeviceSn("QWERTYUIOP20210906");
 		device.setModelSpec("EC-200");
 		device.setIccid("123321123512521");
+		device.setLocateTime(DateUtil.formatDateTime(new Date()));
 		device.setLocateType(0);
 		device.setSoc(100);
 		device.setHdop(1.93f);

@@ -60,9 +60,9 @@ public class Device {
 	 */
 	private Integer locateType;
 	/**
-	 * 最新定位时间（时间戳）
+	 * 最新定位时间
 	 */
-	private Long tsLocateTime;
+	private String locateTime;
 	/**
 	 * 设备经度。WGS84
 	 */
