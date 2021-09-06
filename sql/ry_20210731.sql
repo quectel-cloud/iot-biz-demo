@@ -258,6 +258,9 @@ insert into sys_menu values('1058', '导入代码', '115', '2', '#', '', 1, 0, '
 insert into sys_menu values('1059', '预览代码', '115', '4', '#', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1060', '生成代码', '115', '5', '#', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'admin', sysdate(), '', null, '');
 
+-- 设备demo页面
+insert into sys_menu values('2000', '设备详情', '0', '6', 'deviceInfo', 'deviceInfo', '1', '0', 'C', '0', '0', NULL, 'skill', 'admin', '2021-09-06 16:29:45', 'admin', '2021-09-06 16:30:05', '');
+
 
 -- ----------------------------
 -- 6、用户和角色关联表  用户N-1角色
