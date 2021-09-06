@@ -8,6 +8,7 @@ import com.ruoyi.common.core.redis.RedisCache;
 import com.ruoyi.device.bean.Device;
 import com.ruoyi.device.constant.Constants;
 import com.ruoyi.device.constant.RedisKeyConstants;
+import com.ruoyi.device.model.business.DeviceLocationBO;
 import com.ruoyi.device.model.business.DeviceMatterBO;
 import com.ruoyi.device.model.tsl.TslModel;
 import com.ruoyi.device.model.tsl.TslProperties;
@@ -42,6 +43,7 @@ public class DataHandlerHelper implements DataHandler {
 			device.setProductKey(productKey);
 			device.setImei(deviceKey);
 			device.setOnlineStatus(status);
+			device.setTsOnlineTime(System.currentTimeMillis());
 			redisCache.setCacheObject(key, device);
 		} else {
 			device.setOnlineStatus(status);
@@ -84,7 +86,7 @@ public class DataHandlerHelper implements DataHandler {
 		Map<String, TslProperties> tslPropertiesMap = new HashMap<>();
 		resMap.forEach((k, v) -> dmpPropertiesList.stream().filter(e -> k.equals(e.getCode())).findAny().ifPresent(dmpProperties -> tslPropertiesMap.put(k, dmpProperties)));
 		if (CollectionUtil.isEmpty(tslPropertiesMap)) {
-			log.warn("设备【{}】在AEP中不存在该产品的物模型，", deviceMatterBO.getDeviceKey());
+			log.warn("设备【{}】不存在该产品的物模型，", deviceMatterBO.getDeviceKey());
 			return;
 		}
 		for (Map.Entry<String, Object> map : resMap.entrySet()) {
@@ -105,7 +107,33 @@ public class DataHandlerHelper implements DataHandler {
 
 	@Override
 	public void handleDeviceLocation(String data) {
-		//TODO 处理设备上报的位置信息
+
+		DeviceLocationBO deviceLocationBO;
+		try {
+			deviceLocationBO = JSON.parseObject(data, DeviceLocationBO.class);
+		} catch (Exception e) {
+			log.error("DMP报文数据转型失败！【{}】", data);
+			return;
+		}
+		DeviceLocationBO.Data.LocationData locationData = deviceLocationBO.getData().getKv();
+		if (StringUtils.isEmpty(deviceLocationBO.getProductKey())) {
+			log.error("监听数据缺少PK【{}】", data);
+			return;
+		}
+		if (StringUtils.isEmpty(deviceLocationBO.getDeviceKey())) {
+			log.error("监听数据缺少IMEI【{}】", data);
+			return;
+		}
+		String key = DEVICE + deviceLocationBO.getProductKey() + ":" + deviceLocationBO.getDeviceKey();
+		Device device = redisCache.getCacheObject(key);
+		if (null == device) {
+			log.error("不存在此设备【{}】", deviceLocationBO.getDeviceKey());
+			return;
+		}
+		device.setWgsLng(locationData.getLng());
+		device.setHdop(locationData.getHdop());
+		device.setWgsLat(locationData.getLat());
+		redisCache.setCacheObject(key, device);
 	}
 
 	@Override
