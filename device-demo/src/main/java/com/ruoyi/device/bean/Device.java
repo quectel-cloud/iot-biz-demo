@@ -36,4 +36,9 @@ public class Device {
 	 */
 	private String alarmCode;
 
+
+
+
+
+
 }
