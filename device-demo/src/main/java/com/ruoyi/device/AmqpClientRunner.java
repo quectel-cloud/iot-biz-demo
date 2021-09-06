@@ -7,7 +7,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 import com.ruoyi.common.core.redis.RedisCache;
 import com.ruoyi.common.utils.file.FileUtils;
-import com.ruoyi.device.handler.DataHandler;
+import com.ruoyi.device.bean.Device;
 import com.ruoyi.device.model.tsl.TslModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -18,10 +18,11 @@ import org.springframework.util.ResourceUtils;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 
+import static com.ruoyi.device.constant.RedisKeyConstants.DEVICE;
 import static com.ruoyi.device.constant.RedisKeyConstants.TSL;
 
 /**
@@ -39,13 +40,32 @@ public class AmqpClientRunner implements ApplicationRunner {
 	private RedisCache redisCache;
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception{
+	public void run(ApplicationArguments args) throws Exception {
+		//初始化设备信息
+		Device device = new Device();
+		device.setImei("202109052000123");
+		device.setProductKey("p111r2");
+		device.setDeviceName("智能饲喂机");
+		device.setOnlineStatus(0);
+		device.setTsCreateTime(System.currentTimeMillis());
+		device.setRunningStatus(0);
+		device.setDeviceSn("QWERTYUIOP20210906");
+		device.setModelSpec("EC-200");
+		device.setIccid("123321123512521");
+		device.setLocateType(0);
+		device.setSoc(100);
+		device.setHdop(1.93f);
+		device.setSatellites(6);
+		device.setWgsLng(new BigDecimal("117.127414"));
+		device.setWgsLat(new BigDecimal("31.82613"));
+		String key = DEVICE + "p111r2:202109052000123";
+		redisCache.setCacheObject(key, device);
 
-
+		//初始化TSL信息
 		File file = ResourceUtils.getFile("classpath:tsl/p111r2.json");
 		String tsl = FileUtils.readString(file, "UTF-8");
 		TslModel tslModel = JSON.parseObject(tsl, TslModel.class);
-		redisCache.setCacheObject(TSL+"p111r2",tslModel);
+		redisCache.setCacheObject(TSL + "p111r2", tslModel);
 
 
 		String accessKey = "24b9rucZxRLuBTfVk1KmLiDD";
@@ -83,7 +103,7 @@ public class AmqpClientRunner implements ApplicationRunner {
 				latch.await();
 			}
 		} catch (Exception e) {
-			log.error("AMQP消息监听异常",e);
+			log.error("AMQP消息监听异常", e);
 		}
 	}
 }
