@@ -12,9 +12,9 @@ spring:
         # 主库数据源
         master:
           driverClassName: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/device-demo?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
+          url: jdbc:mysql://192.168.25.71:3306/device-demo?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true
           username: root
-          password: 123456
+          password: Quectel!2020
         # 从库数据源
         slave:
           lazy: true
@@ -74,13 +74,13 @@ spring:
 spring:
   redis:
     # 地址
-    host: 192.168.137.128
+    host: 192.168.25.71
     # 端口，默认为6379
     port: 6379
     # 数据库索引
     database: 0
     # 密码
-    password:
+    password: quectel2020
     # 连接超时时间
     timeout: 10s
     # 是否开启ssl
