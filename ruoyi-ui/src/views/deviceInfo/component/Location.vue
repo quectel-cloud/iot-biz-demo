@@ -89,7 +89,7 @@ export default {
                   </li>
                   <li>
                     <span>定位时间：</span>
-                    <label v-if="positionInfo.locateTime">{{parseTime(positionInfo.tsLocateTime)}}</label>
+                    <label v-if="positionInfo.locateTime">{{positionInfo.locateTime}}</label>
                     <label v-else>--</label>
                   </li>
                   <li>
